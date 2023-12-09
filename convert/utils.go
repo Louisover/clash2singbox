@@ -116,32 +116,32 @@ func PatchMap(
 		}
 	}
 
-	if urltestOut {
-		s = append([]singbox.SingBoxOut{{
-			Type:      "selector",
-			Tag:       "select",
-			Outbounds: append([]string{"urltest"}, tags...),
-			Default:   "urltest",
-		}}, s...)
-		s = append(s, singbox.SingBoxOut{
-			Type:      "urltest",
-			Tag:       "urltest",
-			Outbounds: ftags,
-		})
-	}
-
-	s = append(s, singbox.SingBoxOut{
-		Type: "direct",
-		Tag:  "direct",
-	})
-	s = append(s, singbox.SingBoxOut{
-		Type: "block",
-		Tag:  "block",
-	})
-	s = append(s, singbox.SingBoxOut{
-		Type: "dns",
-		Tag:  "dns-out",
-	})
+// 	if urltestOut {
+// 		s = append([]singbox.SingBoxOut{{
+// 			Type:      "selector",
+// 			Tag:       "select",
+// 			Outbounds: append([]string{"urltest"}, tags...),
+// 			Default:   "urltest",
+// 		}}, s...)
+// 		s = append(s, singbox.SingBoxOut{
+// 			Type:      "urltest",
+// 			Tag:       "urltest",
+// 			Outbounds: ftags,
+// 		})
+// 	}
+//
+// 	s = append(s, singbox.SingBoxOut{
+// 		Type: "direct",
+// 		Tag:  "direct",
+// 	})
+// 	s = append(s, singbox.SingBoxOut{
+// 		Type: "block",
+// 		Tag:  "block",
+// 	})
+// 	s = append(s, singbox.SingBoxOut{
+// 		Type: "dns",
+// 		Tag:  "dns-out",
+// 	})
 
 	anyList := make([]any, 0, len(s)+len(extOut))
 	for _, v := range s {
