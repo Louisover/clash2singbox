@@ -30,10 +30,11 @@ jobs:
           buildmode: default
           trimpath: true
 
-      - name: Publish GitHub Releases
-        uses: softprops/action-gh-release@v1
+      - name: Release and upload assets
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: "clash2singbox ${{ github.ref_name }}"
-          files: |
-            ./dist/*
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          release_name: latest
+          tag: latest
+          file_glob: true
+          file: ./dist/*
