@@ -7,10 +7,6 @@ permissions:
 on:
   # Allow mannual trigger
   workflow_dispatch:
-  # Trigger on push new tag
-  push:
-    tags:
-      - "v*.*.*"
 
 jobs:
   build-and-publish:
