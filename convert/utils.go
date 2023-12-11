@@ -92,7 +92,7 @@ func PatchMap(
 	extOut []interface{},
 	extags []string,
 	urltestOut bool,
-) (map[string]any, error) {
+) ([]any, error) {
 	d := map[string]interface{}{}
 	err := json.Unmarshal(tpl, &d)
 	if err != nil {
@@ -151,5 +151,5 @@ func PatchMap(
 
 	d["outbounds"] = anyList
 
-	return d, nil
+	return anyList, nil
 }
