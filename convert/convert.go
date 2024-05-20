@@ -47,6 +47,18 @@ func Clash2sing(c clash.Clash) ([]singbox.SingBoxOut, error) {
 		}
 		sl = append(sl, nsl...)
 	}
+	slm := make(map[string]singbox.SingBoxOut, len(c.Proxies)+1)
+	for _, v := range sl {
+		slm[v.Tag] = v
+	}
+	for _, v := range c.ProxyGroup {
+		if v.Type != "relay" {
+			continue
+		}
+		l := relay(slm, v.Proxies, v.Name)
+		sl = append(sl, l...)
+	}
+
 	return sl, jerr
 }
 
@@ -84,13 +96,13 @@ func comm(p *clash.Proxies) (*singbox.SingBoxOut, string, error) {
 	if p.Smux.Enabled {
 		s.Multiplex = &singbox.SingMultiplex{
 			Enabled:    true,
-			MaxStreams: p.Smux.MaxStreams,
-			Padding:    p.Smux.Padding,
+			MaxStreams: int(p.Smux.MaxStreams),
+			Padding:    bool(p.Smux.Padding),
 			Protocol:   p.Smux.Protocol,
 		}
 		if p.Smux.MaxStreams == 0 {
-			s.Multiplex.MinStreams = max(p.Smux.MinStreams, 4)
-			s.Multiplex.MaxConnections = max(p.Smux.MaxConnections, 4)
+			s.Multiplex.MinStreams = max(int(p.Smux.MinStreams), 4)
+			s.Multiplex.MaxConnections = max(int(p.Smux.MaxConnections), 4)
 		}
 	}
 

@@ -79,6 +79,7 @@ func shadowTls(p *clash.Proxies, s *singbox.SingBoxOut) ([]singbox.SingBoxOut, e
 	ss.Detour = s.Tag + "-shadowtls"
 
 	tlss := singbox.SingBoxOut{}
+	tlss.Ignored = true
 	tlss.Type = "shadowtls"
 	tlss.Tag = ss.Detour
 	tlss.Server = s.Server
